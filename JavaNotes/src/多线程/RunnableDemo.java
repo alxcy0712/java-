@@ -1,24 +1,36 @@
 package 多线程;
 
-class MyThread implements Runnable{
-    private String name;
-    MyThread(String name){
-        this.name = name;
-    }
 
+
+class MyRunnable implements Runnable{
+
+    private int tickets = 100;
     @Override
-    public void run() {
-        for(int i=0;i<10;i++){
-            System.out.println("线程"+this.name+"运行： i = "+i);
+    public synchronized void run() {
+        while(true){
+            if(tickets<=0) {
+                break;
+            }
+
+            if(tickets == 1){
+                System.out.println(Thread.currentThread().getName()+"抢到了最后"+this.tickets--+"张票");
+            }else{
+                System.out.println(Thread.currentThread().getName()+"抢到了第"+this.tickets--+"张票");
+            }
+
         }
     }
 }
 
 public class RunnableDemo {
+
     public static void main(String[] args) {
-        MyThread myThread1 = new MyThread("A");
-        MyThread myThread2 = new MyThread("B");
-        new Thread(myThread1).start();
-        new Thread(myThread2).start();
+        MyRunnable myThread1 = new MyRunnable();
+        new Thread(myThread1,"A").start();
+        new Thread(myThread1,"B").start();
+        new Thread(myThread1,"C").start();
+        new Thread(myThread1,"D").start();
+        new Thread(myThread1,"E").start();
+
     }
 }
