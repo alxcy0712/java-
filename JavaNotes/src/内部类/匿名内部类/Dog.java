@@ -24,7 +24,6 @@ public class Dog {
     }
     //还有一种类似Android里面的addButtonListener()中就用到了匿名内部类
 
-
     public static void main(String[] args) {
         Dog.getInnerInstance("hello world",10).speak();
         Dog.getInnerInstance("hello world",10).getAge();
